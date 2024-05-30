@@ -1,12 +1,4 @@
 .DS_Store
 
-0x00-ES6_basic/node_modules/*
-# 0x00-ES6_basic/package.json
-0x00-ES6_basic/package-lock.json
-
-0x01-ES6_promise/node_modules/*
-# 0x01-ES6_promise/package.json
-0x01-ES6_promise/package-lock.json
-# 0x01-ES6_promise/.eslintrc.js
-# 0x01-ES6_promise/babel.config.js
-# 0x01-ES6_promise/utils.js
+*/node_modules/*
+*/package-lock.json
