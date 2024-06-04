@@ -2,7 +2,7 @@ export default function cleanSet(set, startString) {
   if (startString === '') return startString;
 
   return Array.from(set)
-    .map((element) => (element.startsWith(startString) ? element.replace(startString, '') : null))
-    .filter((element) => element !== null)
+    .filter((element) => element.startsWith(startString))
+    .map((element) => element.replace(startString, ''))
     .join('-');
 }
