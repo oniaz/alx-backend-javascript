@@ -3,40 +3,40 @@ const fs = require('fs').promises;
 
 const app = express();
 
-function countStudents(filePath) {
-  return fs.readFile(filePath, 'utf8')
-    .then((data) => {
-      const rows = data.split('\n').filter((row) => row.trim() !== '');
-      const headers = rows[0].split(',');
-      const studentsByField = {};
-
-      rows.slice(1).forEach((row) => {
-        const values = row.split(',');
-        const field = values[headers.indexOf('field')];
-        const firstname = values[headers.indexOf('firstname')];
-
-        if (field && firstname) {
-          if (!studentsByField[field]) {
-            studentsByField[field] = [];
+function countStudents(path) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, 'utf8')
+      .then((data) => {
+        const lines = data.split('\n');
+        const hashtable = {};
+        let students = -1;
+        let result = '';
+        for (const line of lines) {
+          if (line.trim() !== '') {
+            const columns = line.split(',');
+            const field = columns[3];
+            const firstname = columns[0];
+            if (students >= 0) {
+              if (!Object.hasOwnProperty.call(hashtable, field)) {
+                hashtable[field] = [];
+              }
+              hashtable[field] = [...hashtable[field], firstname];
+            }
+            students += 1;
           }
-          studentsByField[field].push(firstname);
         }
+        result += `Number of students: ${students}\n`;
+        for (const key in hashtable) {
+          if (Object.hasOwnProperty.call(hashtable, key)) {
+            result += `Number of students in ${key}: ${hashtable[key].length}. List: ${hashtable[key].join(', ')}\n`;
+          }
+        }
+        resolve(result);
+      })
+      .catch(() => {
+        reject(new Error('Cannot load the database'));
       });
-
-      let output = `Number of students: ${rows.length - 1}`;
-
-      Object.keys(studentsByField).forEach((field) => {
-        output += `\nNumber of students in ${field}: ${studentsByField[field].length}. List: ${studentsByField[field].join(', ')}`;
-      });
-
-      return output;
-    })
-    .catch((err) => {
-      if (err.code === 'ENOENT') {
-        throw new Error('Cannot load the database');
-      }
-      throw err;
-    });
+  });
 }
 
 app.get('/', (req, res) => {
@@ -48,12 +48,11 @@ app.get('/students', (req, res) => {
     .then((data) => {
       res.send(`This is the list of our students\n${data}`);
     })
-    .catch((err) => {
-      res.send(err.message);
+    .catch((error) => {
+      res.status(500).send(`This is the list of our students\n${error.message}`);
     });
 });
 
-app.listen(1245, () => {
-});
+app.listen(1245);
 
 module.exports = app;
