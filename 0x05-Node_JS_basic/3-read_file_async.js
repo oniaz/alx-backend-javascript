@@ -26,8 +26,6 @@ function countStudents(filePath) {
       Object.keys(studentsByField).forEach((field) => {
         console.log(`Number of students in ${field}: ${studentsByField[field].length}. List: ${studentsByField[field].join(', ')}`);
       });
-
-      return rows.length - 1;
     })
     .catch((err) => {
       if (err.code === 'ENOENT') {
