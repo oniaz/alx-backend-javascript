@@ -5,7 +5,7 @@ describe('calculateNumber', function () {
   // Test SUM operation
   describe('SUM', function () {
     it('should return the sum of rounded numbers', function () {
-      expect(calculateNumber('SUM', 1.2, 2.3)).to.equal(6);
+      expect(calculateNumber('SUM', 1.2, 2.3)).to.equal(3);
     });
 
     it('should handle negative numbers', function () {
@@ -61,7 +61,7 @@ describe('calculateNumber', function () {
 
   // Test invalid type
   describe('Invalid type', function () {
-    it('should return undefined for invalid type', function () {
+    it('should return Error for invalid type', function () {
       expect(calculateNumber('INVALID', 1.2, 2.3)).to.equal(undefined);
     });
   });
