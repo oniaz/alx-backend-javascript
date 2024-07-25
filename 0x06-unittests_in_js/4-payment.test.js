@@ -1,7 +1,7 @@
 const sinon = require('sinon');
 // const expect = require('chai').expect;
 const Utils = require('./utils.js');
-const sendPaymentRequestToApi = require('./3-payment');
+const sendPaymentRequestToApi = require('./4-payment');
 
 describe('sendPaymentRequestToApi', function () {
   it('should use Utils.calculateNumber with SUM type', function () {
