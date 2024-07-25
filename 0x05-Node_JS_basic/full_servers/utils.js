@@ -18,14 +18,7 @@ function readDatabase(filePath) {
         }
       });
 
-
-      let output= {};
-
-      Object.keys(studentsByField).forEach((field) => {
-        output += `\nNumber of students in ${field}: ${studentsByField[field].length}. List: ${studentsByField[field].join(', ')}`;
-      });
-
-      return output;
+      return studentsByField;
     })
     .catch((err) => {
       if (err.code === 'ENOENT') {
@@ -34,3 +27,5 @@ function readDatabase(filePath) {
       throw err;
     });
 }
+
+module.exports = readDatabase;
