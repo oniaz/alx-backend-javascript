@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { calculateNumber } = require('./1-calcul.js');
+const calculateNumber = require('./1-calcul');
 
 describe('calculateNumber', function () {
   // Test SUM operation
@@ -55,7 +55,7 @@ describe('calculateNumber', function () {
     });
 
     it('should handle division with very small numbers', function () {
-      assert.strictEqual(calculateNumber('DIVIDE', 1e-10, 1e-5), 'Error');
+      assert.strictEqual(calculateNumber('DIVIDE', 1e-10, 1e-5), Error);
     });
   });
 
