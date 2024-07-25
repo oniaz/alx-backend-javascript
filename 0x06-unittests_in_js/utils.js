@@ -5,7 +5,10 @@ const Utils = {
         } else if (type === 'SUBTRACT') {
             return Math.round(a) - Math.round(b);
         } else if (type === 'DIVIDE') {
-            return b !== 0 ? Math.round(a) / Math.round(b) : 'Error';
+            if (Math.round(b) === 0) {
+                return 'Error';
+            }
+            return Math.round(a) / Math.round(b);
         }
     }
 };
