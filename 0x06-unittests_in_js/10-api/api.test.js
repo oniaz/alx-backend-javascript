@@ -63,7 +63,7 @@ describe('GET /cart/:id', function () {
 
 });
 
-describe('GET /cart/available_payments', function () {
+describe('GET /available_payments', function () {
   it('should return a status code of 200', function (done) {
     request.get("http://localhost:7865/available_payments", (err, res, body) => {
       if (err) return done(err);
