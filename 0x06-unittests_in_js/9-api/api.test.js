@@ -53,9 +53,10 @@ describe('GET /cart/:id', function () {
     });
   });
 
-  it('should return a status code of 404 when id is not a number', function (done) {
-    request.get('http://localhost:7865/notanumber', (err, res, body) => {
-      expect(res.statusCode).to.equal(404);
+
+  it('should return status code 404 when id is not a number', function (done) {
+    request.get('http://localhost:7865/cart/hello', function (error, response, body) {
+      expect(response.statusCode).to.equal(404);
       done();
     });
   });
