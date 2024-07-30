@@ -3,7 +3,7 @@ const fs = require('fs').promises;
 
 const app = express();
 
-function countStudents(filePath) {
+async function countStudents(filePath) {
   return fs.readFile(filePath, 'utf8')
     .then((data) => {
       const rows = data.split('\n').filter((row) => row.trim() !== '');
